@@ -4,6 +4,8 @@ require('dotenv').config()
 const express=require('express');
 const app=express();
 const port=3000;
+const notFound=require('./middleware/not-found');
+const errorHandler=require('./middleware/errorHandler');
 
 const tasks= require('./routes/task')
 
@@ -11,9 +13,9 @@ app.use(express.json());
 app.use(express.static('./public'))
 app.use('/api/v1/tasks',tasks);
 
-app.get('/api/v1/tasks/',(req,res)=>{
-
-})
+//keep it at bottom or it will override
+app.use(notFound)
+app.use(errorHandler)
 
 const start=async ()=>{
     try {
@@ -25,4 +27,3 @@ const start=async ()=>{
 }
 
 start()
-
