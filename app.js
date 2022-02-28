@@ -16,6 +16,7 @@ app.use('/api/v1/tasks',tasks);
 //keep it at bottom or it will override
 app.use(notFound)
 app.use(errorHandler)
+const port=process.env.PORT || 5000
 
 const start=async ()=>{
     try {
